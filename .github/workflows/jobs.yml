@@ -1,0 +1,35 @@
+name: Jobs workflow
+on: push
+
+jobs:
+    exist-html:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get repo code
+              uses : actions/checkout@v7
+
+            - name: validate html file
+              run: test -f index.html
+              
+    exist-js:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get repo code
+              uses : actions/checkout@v7
+
+            - name: validate js file
+              run: test -f script.js
+
+    Validate-code:
+        needs: [exist-html,exist-js]
+        runs-on: ubuntu-latest
+        steps:
+            - name: get repo code
+              uses : actions/checkout@v7
+
+            - name: validate js file
+              run: test -f script.js
+
+            - name: validate html file
+              run: npx htmlhint index.html
+              
