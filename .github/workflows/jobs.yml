@@ -1,6 +1,10 @@
 name: Jobs workflow
-on: push
-
+on:
+    workflow_run:
+        workflows: [First Workflow]
+        types: 
+            - completed
+            
 jobs:
     exist-html:
         runs-on: ubuntu-latest
